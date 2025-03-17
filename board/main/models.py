@@ -73,8 +73,7 @@ class Comment(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     advert = models.ForeignKey(Advert, on_delete=models.CASCADE, related_name="comments")
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    category = models.ForeignKey(Category, models.DO_NOTHING)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")
 
     def __str__(self) -> str:
         return f"{self.advert.title}: created at {self.created_at}"
