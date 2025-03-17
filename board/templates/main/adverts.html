@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block page_title %}Adverts{% endblock %}
+
+{% block content %}
+    <h2>Adverts</h2>
+    <div class="d-flex">
+        {% for advert in adverts %}
+            {% include 'components/advert_card.html' with card=advert %}
+        {% endfor %}
+    </div>
+
+{% endblock %}

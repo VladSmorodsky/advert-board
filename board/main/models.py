@@ -1,9 +1,13 @@
 from django.contrib.auth.models import AbstractUser, Group, Permission
+from django.core.validators import MinValueValidator
 from django.db import models
 
 
 # Create your models here.
 class User(AbstractUser):
+    """
+    User model
+    """
     password = models.CharField(max_length=128, verbose_name="password")
     phone = models.CharField(max_length=15, unique=True)
     groups = models.ManyToManyField(Group, blank=True, related_name="User_set")
@@ -14,6 +18,9 @@ class User(AbstractUser):
 
 
 class Category(models.Model):
+    """
+    Category model
+    """
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
 
@@ -29,9 +36,12 @@ class Category(models.Model):
 
 
 class Advert(models.Model):
+    """
+    Advert model
+    """
     title = models.CharField(max_length=100)
     description = models.TextField()
-    price = models.FloatField()
+    price = models.DecimalField(decimal_places=2, max_digits=10, validators=[MinValueValidator(0.01)])
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=True)
@@ -57,6 +67,9 @@ class Advert(models.Model):
 
 
 class Comment(models.Model):
+    """
+    Comment model
+    """
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     advert = models.ForeignKey(Advert, on_delete=models.CASCADE, related_name="comments")
