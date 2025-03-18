@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>New Advertisement Created</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+
+        .header {
+            background-color: #007bff;
+            padding: 15px;
+            color: white;
+            text-align: center;
+        }
+
+        .header h2 {
+            margin: 0;
+        }
+
+        .content {
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #ddd;
+        }
+
+        .footer {
+            font-size: 12px;
+            text-align: center;
+            color: #888;
+            margin-top: 20px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h2>New Advertisement Created</h2>
+    </div>
+    <div class="content">
+        <p>Hi {{ advert.user.username }},</p>
+        <p>We are excited to inform you that your advertisement titled <strong>{{ advert.title }}</strong> has been
+            successfully created!</p>
+        <p>To view your ad, click the button below:</p>
+        <a href="{% url 'advert_detail' advert.id %}" class="btn-primary">View Your Advertisement</a>
+    </div>
+    <div class="footer">
+        <p>Best regards,<br>Advert Site</p>
+        <p>&copy; 2025 Your Website Name. All rights reserved.</p>
+    </div>
+</div>
+</body>
+</html>
