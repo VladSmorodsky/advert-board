@@ -78,8 +78,12 @@ WSGI_APPLICATION = 'board.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',  # Use PostgreSQL as the database engine
+        'NAME': os.getenv("POSTGRES_DB"),  # Your database name
+        'USER': os.getenv("POSTGRES_USER"),  # Your database user
+        'PASSWORD': os.getenv("POSTGRES_PASSWORD"),  # Your database user's password
+        'HOST': os.getenv("POSTGRES_HOST"),  # Use 'localhost' or the IP address of your PostgreSQL server
+        'PORT': os.getenv("POSTGRES_PORT"),  # Default PostgreSQL port
     }
 }
 
@@ -125,9 +129,9 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Email configuration
-EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST=os.getenv("EMAIL_HOST")
-EMAIL_PORT=os.getenv("EMAIL_PORT")
-EMAIL_HOST_USER=os.getenv("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD=os.getenv("EMAIL_HOST_PASSWORD")
-DEFAULT_FROM_EMAIL=EMAIL_HOST_USER
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_PORT = os.getenv("EMAIL_PORT")
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

@@ -1,20 +1,39 @@
 from django.contrib.admin.views.decorators import staff_member_required
+from django.db.models import Count
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 
-from main.models import Advert
+from main.models import Advert, Category, Comment
 
 
 # Create your views here.
 @staff_member_required
-def admin_statistics(request: HttpRequest):
+def admin_statistics(request: HttpRequest) -> HttpResponse:
     """
     Show statistics page.
     :param request:
     :return:
     """
-    return render(request, 'main/statistics.html')
+    total_advert_count = Advert.objects.all().count()
+    comments_count = Comment.objects.all().count()
+    total_inactive_advert_count = Advert.objects.filter(is_active=False).count()
+    total_active_advert_count = Advert.objects.filter(is_active=True).count()
+    categories = Category.objects.annotate(advert_count=Count('adverts'))
+    return render(request, 'admin/statistics.html', {
+        'total_advert_count': total_advert_count,
+        'total_inactive_advert_count': total_inactive_advert_count,
+        'total_active_advert_count': total_active_advert_count,
+        'comments_count': comments_count,
+        'categories': categories,
+    })
+
+
+def home(request: HttpRequest) -> HttpResponse:
+    """
+    Redirect to adverts page
+    """
+    return redirect('adverts')
 
 
 class AdvertListView(View):

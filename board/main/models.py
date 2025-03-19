@@ -39,7 +39,7 @@ class Advert(models.Model):
     """
     Advert model
     """
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=100, db_index=True)
     description = models.TextField()
     price = models.DecimalField(decimal_places=2, max_digits=10, validators=[MinValueValidator(0.01)])
     created_at = models.DateTimeField(auto_now_add=True)
