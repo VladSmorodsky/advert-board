@@ -13,6 +13,9 @@ from main.models import Advert
 
 @receiver(request_finished)
 def set_adverts_inactive(sender, **kwargs) -> None:
+    """
+    Signal sets adverts inactive after 30 days of their publishing.
+    """
     current_date = datetime.now()
     active_adverts = Advert.objects.filter(is_active=True, created_at__lte=current_date - timedelta(days=30))
     active_adverts.update(is_active=False)
@@ -20,6 +23,9 @@ def set_adverts_inactive(sender, **kwargs) -> None:
 
 @receiver(post_save, sender=Advert)
 def advert_created(sender, instance, created, **kwargs):
+    """
+    Signal is responsible for sending email when advert is created.
+    """
     if created:
         context = {
             "advert": instance,

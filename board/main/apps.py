@@ -7,6 +7,9 @@ class MainConfig(AppConfig):
     name = 'main'
 
     def ready(self):
+        """
+        Setup signals
+        """
         from . import signals
 
         request_finished.connect(signals.set_adverts_inactive) # register signal
