@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block page_title %}{{ advert.title }}{% endblock %}
+
+{% block content %}
+    <div>
+        <h1>{{ advert.title }}</h1>
+        <div class="my-3">
+            {{ advert.description }}
+        </div>
+        <div>
+            <p> Customer: <a href="{% url 'adverts' %}?user_id={{ advert.user.id }}"
+                             class="">{{ advert.user.username }}</a></p>
+        </div>
+    </div>
+{% endblock %}

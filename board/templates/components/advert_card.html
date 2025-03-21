@@ -1,0 +1,18 @@
+<div class="card mx-1" style="width: 18rem;">
+    <div class="card-body">
+        <div class="d-flex justify-content-between">
+            <h5 class="card-title">{{ advert.title }}</h5>
+            <a href="?category_id={{ advert.category.id }}"><span
+                    class="badge bg-primary">{{ advert.category.name }}</span></a>
+        </div>
+        <div>
+            <a href="?user_id={{ advert.user.id }}" class="card-link">{{ advert.user.username }}</a>
+            <span class="fs-6">{{ advert.created_at|date:"F d, Y" }}</span>
+            <span>{{ advert.get_comments_count }}</span>
+        </div>
+        <p class="card-text">{{ advert.get_short_description }}...</p>
+        <div class="d-flex justify-content-between">
+            <a href="{% url 'advert_detail' advert.id %}" class="card-link">Show more</a>
+        </div>
+    </div>
+</div>
